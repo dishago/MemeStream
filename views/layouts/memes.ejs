@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <title>Meme Stream</title>
+</head>
+<body class="container">
+    <h1>Meme Stream</h1>
+    <%- include('../partials/new_form')%>
+
+    <% for(meme of lastMemes) { %>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"> <%= meme.name %> </h4>
+                <p class="card-text"> <%= meme.caption %> </p>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href='/memes/<%=meme._id%>'><img class="img-fluid img-thumbnail" src="<%= meme.url %>"></a>
+            </div>
+        </div>
+    <% } %>
+
+</body>
+</html>

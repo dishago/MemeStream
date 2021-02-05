@@ -1,0 +1,20 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <title><%= meme.caption %></title>
+</head>
+<body>
+    <div class="container">
+        <h2 class="card-title"> <%= meme.name %> </h2>
+        <p class="card-text"> <%= meme.caption %> </p>
+        <img class="img-fluid img-thumbnail" style="max-width: 500px;" src="<%= meme.url %>">
+    </div>
+    <div class="container">
+        <a class='btn btn-info' href='/memes'>All memes</a>
+        <a class='btn btn-info' href='/memes/<%= meme._id %>/edit'>Edit meme</a>
+    </div>
+</body>
+</html>
