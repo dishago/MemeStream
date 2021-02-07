@@ -1,0 +1,96 @@
+import React, { Component } from "react";
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button';
+import http from "../http-common";
+
+export default class EditMeme extends Component {
+  constructor(props) {
+    super(props)
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeCaption = this.onChangeCaption.bind(this);
+    this.onChangeUrl = this.onChangeUrl.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
+    this.state = {
+      name: '',
+      caption: '',
+      url: ''
+    }
+  }
+
+  componentDidMount() {
+    http.get('/memes/' + this.props.match.params.id)
+      .then(res => {
+        this.setState({
+          name: res.data.name,
+          caption: res.data.caption,
+          url: res.data.url
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  onChangeName(e) {
+    this.setState({name: e.target.value})
+  }
+
+  onChangeCaption(e) {
+    this.setState({caption: e.target.value})
+  }
+
+  onChangeUrl(e) {
+    this.setState({url: e.target.value})
+  }
+
+  async onSubmit(e) {
+     e.preventDefault()
+
+    console.log(`Meme successfully created!`);
+    console.log(`Name: ${this.state.name}`);
+    console.log(`Caption: ${this.state.caption}`);
+    console.log(`URL: ${this.state.url}`);
+
+    const memeObject = {
+        name: this.state.name,
+        caption: this.state.caption,
+        url: this.state.url
+    }
+
+    await http.patch('/memes/'+this.props.match.params.id, JSON.stringify(memeObject), {headers:{"Content-Type" : "application/json"}})
+        .then(res => console.log(res.data))
+        .catch((error) => {console.log(error)}); 
+
+    this.props.history.push('/memes')
+  }
+
+
+  render() {
+    return (
+      <div className="form-wrapper">
+        <h1>Meme Update</h1> 
+        <Form onSubmit={this.onSubmit}>
+          <Form.Group controlId="Name">
+            <Form.Label>Enter Name</Form.Label>
+            <Form.Control type="text" placeholder="Enter your full name" value={this.state.name} onChange={this.onChangeName} readOnly />
+          </Form.Group>
+
+          <Form.Group controlId="caption">
+            <Form.Label>Enter Caption</Form.Label>
+            <Form.Control type="text" placeholder="Enter a catchy caption" value={this.state.caption} onChange={this.onChangeCaption}/>
+          </Form.Group>
+
+          <Form.Group controlId="url">
+            <Form.Label>Enter Image URL</Form.Label>
+            <Form.Control type="text" placeholder="Enter the URL" value={this.state.url} onChange={this.onChangeUrl} />
+          </Form.Group>
+
+          <Button variant="success" size="lg" block="block" type="submit">
+            Update Meme
+          </Button>
+        </Form>
+      </div>
+    );
+  }
+}

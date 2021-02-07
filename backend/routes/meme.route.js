@@ -64,6 +64,10 @@ router.route('/memes/:id').patch((req, res, next) => {
   })
 })
 
+router.route('/').get((req, res, next) => {
+  res.send('Hello! Please check https://disha-xmeme.herokuapp.com/memes to see all memes.')
+})
+
 // // Delete Student
 // router.route('/delete-student/:id').delete((req, res, next) => {
 //   studentSchema.findByIdAndRemove(req.params.id, (error, data) => {

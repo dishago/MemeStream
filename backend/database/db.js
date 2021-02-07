@@ -1,3 +1,3 @@
 module.exports = {
-    db: process.env.MONGODB_URI
+    db: process.env.MONGODB_URI || 'mongodb://localhost:27017/Xmeme'
   };
