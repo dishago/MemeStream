@@ -11,6 +11,7 @@ import CreateMeme from "./components/create-meme";
 import EditMeme from "./components/edit-meme";
 import MemeList from "./components/meme-list";
 import ShowMeme from "./components/show-meme"
+import LandingPage from "./components/landing-page"
 
 function App() {
   return (<Router>
@@ -20,7 +21,7 @@ function App() {
           <Col md={12}>
             <div className="wrapper">
               <Switch>
-                <Route exact path='/' component={CreateMeme} />
+                <Route exact path='/' component={LandingPage} />
                 <Route path="/memes/:id/edit" component={EditMeme} />
                 <Route path="/memes/:id" component={ShowMeme} />
                 <Route path="/memes" component={MemeList} />

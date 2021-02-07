@@ -68,17 +68,17 @@ router.route('/').get((req, res, next) => {
   res.send('Hello! Please check https://disha-xmeme.herokuapp.com/memes to see all memes.')
 })
 
-// // Delete Student
-// router.route('/delete-student/:id').delete((req, res, next) => {
-//   studentSchema.findByIdAndRemove(req.params.id, (error, data) => {
-//     if (error) {
-//       return next(error);
-//     } else {
-//       res.status(200).json({
-//         msg: data
-//       })
-//     }
-//   })
-// })
+ // Delete Student
+router.route('/memes/:id/delete').delete((req, res, next) => {
+  memeSchema.findOneAndDelete(req.params.id, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.status(200).json({
+        msg: data
+      })
+    }
+  })
+})
 
 module.exports = router;
