@@ -7,7 +7,7 @@ import './App.css'
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import CreateMeme from "./components/create-meme";
+import Error from "./components/error-message";
 import EditMeme from "./components/edit-meme";
 import MemeList from "./components/meme-list";
 import ShowMeme from "./components/show-meme"
@@ -25,6 +25,8 @@ function App() {
                 <Route path="/memes/:id/edit" component={EditMeme} />
                 <Route path="/memes/:id" component={ShowMeme} />
                 <Route path="/memes" component={MemeList} />
+                <Route path="/error" component={Error} />
+                <Route component={Error} />
               </Switch>
             </div>
           </Col>

@@ -5,8 +5,7 @@ const memeSchema = new mongoose.Schema({
         type: String
     },
     name: {
-        type: String,
-        required: true
+        type: String
     },
     url: {
         type: String

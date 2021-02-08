@@ -10,7 +10,7 @@ export default class MemeCard extends Component {
                 <Card.Body>
                     <Card.Title as="h3"> {this.props.obj.name} </Card.Title>
                     <Card.Text as="h5"> {this.props.obj.caption} </Card.Text>
-                    <Card.Img src= {this.props.obj.url}/>
+                    <Card.Img src= {this.props.obj.url} style={{width: "50%", height: "50%"}}/>
                 </Card.Body>
                 {
                     this.props.showAll === "true" ? <Link className="edit-link" to={"/memes"}>All memes</Link> : 

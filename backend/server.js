@@ -22,6 +22,8 @@ mongoose.connect(dbConfig.db, {
   }
 )
 
+mongoose.set('useFindAndModify', false);
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

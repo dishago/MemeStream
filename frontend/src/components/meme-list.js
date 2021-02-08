@@ -19,7 +19,7 @@ export default class MemeList extends Component {
             });
           })
           .catch((error) => {
-            console.log(error);
+            this.props.history.push('/error')
           })
       }
 

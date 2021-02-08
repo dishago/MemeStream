@@ -32,17 +32,11 @@ export default class CreateMeme extends Component {
       }
     
       async onSubmit(e) {
-        //e.preventDefault()
         const form = e.currentTarget;
         if (form.checkValidity() === false) {
           e.preventDefault();
           e.stopPropagation();
         }
-      
-          // console.log(`Meme successfully created!`);
-          // console.log(`Name: ${this.state.name}`);
-          // console.log(`Caption: ${this.state.caption}`);
-          // console.log(`URL: ${this.state.url}`);
         else {
           e.preventDefault()
           const memeObject = {
@@ -51,12 +45,12 @@ export default class CreateMeme extends Component {
               url: this.state.url
           }
 
-          await http.post('/memes', memeObject, {params: {name: this.state.name, caption: this.state.caption, url: this.state.url} })
-              .then(res => console.log(res.data));
-          
-          console.log(`Meme successfully created!`);
+          await http.post('/memes', JSON.stringify(memeObject), {params: {name: this.state.name, caption: this.state.caption, url: this.state.url} })
+              .then(res => {})
+              .catch(err => this.props.history.push('/error'))
       
           this.setState({name: '', caption: '', url: ''})
+          window.location.reload()
         }
         this.setState({validated: true})
       }
@@ -68,8 +62,7 @@ export default class CreateMeme extends Component {
       <Form className="needs-validation" noValidate validated={this.validated} onSubmit={this.onSubmit}>
         <Form.Group controlId="Name">
           <Form.Label>Enter Name</Form.Label>
-          <Form.Control required isInvalid={this.state.validated} type="text" placeholder="Enter your full name" value={this.state.name} onChange={this.onChangeName}/>
-          <Form.Control.Feedback type="invalid">Please provide a valid name.</Form.Control.Feedback>
+          <Form.Control type="text" placeholder="Enter your full name" value={this.state.name} onChange={this.onChangeName}/>
         </Form.Group>
 
         <Form.Group controlId="caption">
@@ -79,7 +72,8 @@ export default class CreateMeme extends Component {
 
         <Form.Group controlId="url">
           <Form.Label>Enter Image URL</Form.Label>
-          <Form.Control type="url" placeholder="Enter the URL" value={this.state.url} onChange={this.onChangeUrl} />
+          <Form.Control type="url" required isInvalid={this.state.validated} placeholder="Enter the URL" value={this.state.url} onChange={this.onChangeUrl} />
+          <Form.Control.Feedback type="invalid">Please provide a valid URL.</Form.Control.Feedback>
         </Form.Group>
 
         <Button variant="success" size="lg" block="block" type="submit">

@@ -28,7 +28,7 @@ export default class EditMeme extends Component {
         });
       })
       .catch((error) => {
-        console.log(error);
+        this.props.history.push('/error')
       })
   }
 
@@ -47,22 +47,16 @@ export default class EditMeme extends Component {
   async onSubmit(e) {
      e.preventDefault()
 
-    console.log(`Meme successfully created!`);
-    console.log(`Name: ${this.state.name}`);
-    console.log(`Caption: ${this.state.caption}`);
-    console.log(`URL: ${this.state.url}`);
-
     const memeObject = {
         name: this.state.name,
         caption: this.state.caption,
         url: this.state.url
     }
 
-    await http.patch('/memes/'+this.props.match.params.id, JSON.stringify(memeObject), {headers:{"Content-Type" : "application/json"}})
-        .then(res => console.log(res.data))
-        .catch((error) => {console.log(error)}); 
-
-    this.props.history.push('/memes')
+    await http.patch('/memes/'+this.props.match.params.id, memeObject)
+        .then(res => {console.log(res)})
+        .catch((error) => this.props.history.push('/error')); 
+      this.props.history.push('/memes')
   }
 
 
