@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
 import http from "../http-common";
 
 export default class EditMeme extends Component {
@@ -53,10 +54,11 @@ export default class EditMeme extends Component {
         url: this.state.url
     }
 
+    // To update an existing meme in the database using the record id provided
     await http.patch('/memes/'+this.props.match.params.id, memeObject)
         .then(res => {console.log(res)})
         .catch((error) => this.props.history.push('/error')); 
-      this.props.history.push('/memes')
+      this.props.history.push('/memes') // Redirect to all memes page to see the updated  meme
   }
 
 
@@ -84,6 +86,7 @@ export default class EditMeme extends Component {
             Update Meme
           </Button>
         </Form>
+        <Image src={this.state.url} alt="Meme Image"/>
       </div>
     );
   }

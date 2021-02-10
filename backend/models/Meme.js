@@ -1,3 +1,7 @@
+/**
+ * Define a model for a MongoDB collection. It creates a collection called 'Memes' which stores id, name, url and caption of each record.
+ */
+
 const mongoose = require('mongoose')
 
 const memeSchema = new mongoose.Schema({

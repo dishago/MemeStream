@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
 import http from "../http-common";
 
 export default class CreateMeme extends Component {
@@ -33,9 +34,12 @@ export default class CreateMeme extends Component {
     
       async onSubmit(e) {
         const form = e.currentTarget;
+
+        // Check form validity to give appropriate errors
         if (form.checkValidity() === false) {
           e.preventDefault();
           e.stopPropagation();
+          this.setState({validated: true})
         }
         else {
           e.preventDefault()
@@ -45,6 +49,7 @@ export default class CreateMeme extends Component {
               url: this.state.url
           }
 
+          // To create a new meme in the database
           await http.post('/memes', JSON.stringify(memeObject), {params: {name: this.state.name, caption: this.state.caption, url: this.state.url} })
               .then(res => {})
               .catch(err => this.props.history.push('/error'))
@@ -52,7 +57,6 @@ export default class CreateMeme extends Component {
           this.setState({name: '', caption: '', url: ''})
           window.location.reload()
         }
-        this.setState({validated: true})
       }
 
   render() {

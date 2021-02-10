@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 
+// To display memes in a specific card format
 export default class MemeCard extends Component {
     render() {
         const meme = "/memes"+this.props.obj._id
