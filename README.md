@@ -19,4 +19,7 @@ The project is developed using the MERN tech stack.
 
 ## Deployment
 
-The project has been deployed on Heroku and can be viewed at https://disha-memestream.herokuapp.com
+The project has been deployed on Heroku and can be viewed at https://disha-memestream.herokuapp.com (frontend) and https://disha-xmeme.herokuapp.com (backend)
+
+## API documentation
+API documentation is done using Swagger and can be found locally at http:localhost:8081/swagger-ui/ OR publically deployed at http://disha-xmeme.herokuapp.com/swagger-ui/
