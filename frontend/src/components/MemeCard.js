@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import SocialMediaButtons from './SocialMediaButtons'
 
 // To display memes in a specific card format
 export default class MemeCard extends Component {
@@ -10,7 +11,6 @@ export default class MemeCard extends Component {
     }
 
     render() {
-        const meme = "/memes"+this.props.obj._id
         return (
             <Card>
                 <Card.Body>
@@ -36,6 +36,7 @@ export default class MemeCard extends Component {
                         <Button className="btn-danger">Delete</Button>
                     </Link>
                 </div>
+                <SocialMediaButtons url={"https://disha-memestream.herokuapp.com/memes/" + this.props.obj._id} caption={this.props.obj.caption} />
             </Card>
         );
     }
