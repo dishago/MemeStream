@@ -49,14 +49,13 @@ export default class EditMeme extends Component {
      e.preventDefault()
 
     const memeObject = {
-        name: this.state.name,
         caption: this.state.caption,
         url: this.state.url
     }
 
     // To update an existing meme in the database using the record id provided
     await http.patch('/memes/'+this.props.match.params.id, memeObject)
-        .then(res => {console.log(res)})
+        .then()
         .catch((error) => this.props.history.push('/error')); 
       this.props.history.push('/memes') // Redirect to all memes page to see the updated  meme
   }
