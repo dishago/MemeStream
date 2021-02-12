@@ -24,7 +24,7 @@ router.route('/memes').post((req, res, next) => {
     } else {
       memeSchema.create(meme, (error, data) => {
         if (error) {
-          return next(error)
+          return res.status(406).send(error)
         } else {
           res.status(201).json({"id": data._id, "name": data.name, "caption": data.caption, "url": data.url})
         }
@@ -45,7 +45,7 @@ router.route('/memes').get((req, res, next) => {
 router.route('/memes/:id').get((req, res, next) => {
   memeSchema.findById(req.params.id, (error, data) => {
     if (error) {
-      return res.status(404).send("Record not found!")
+      return res.status(404).send(`Record not found! ${error}`)
     } else {
       res.status(200).json(data)
     }
@@ -55,7 +55,7 @@ router.route('/memes/:id').get((req, res, next) => {
 // UPDATE Meme
 router.route('/memes/:id').patch((req, res) => {
   if(req.body.name!=null) {
-    return res.status(403).send("Cannot change name!")
+    return res.status(403).send(`Cannot change name!`)
   }
   memeSchema.findOneAndUpdate({_id: req.params.id}, {
     $set: req.body
@@ -75,13 +75,11 @@ router.route('/').get((req, res) => {
 
 // DELETE Meme
 router.route('/memes/:id').delete((req, res, next) => {
-  memeSchema.findOneAndDelete(req.params.id, (error, data) => {
+  memeSchema.findOneAndDelete({_id: req.params.id}, (error, data) => {
     if (error) {
       return res.status(404).send(error)
     } else {
-      res.status(200).json({
-        msg: data
-      })
+      res.status(200).json(data)
     }
   })
 })

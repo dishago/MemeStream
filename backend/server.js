@@ -13,6 +13,10 @@ let bodyParser = require('body-parser');
 
 let dbConfig = require('./database/db');
 
+// Swagger API documentation
+const swaggerUi = require('swagger-ui-express'),
+swaggerDocument = require('./swagger.json');
+
 // Express Route
 const memeRoute = require('./routes/meme.route')
 
@@ -40,15 +44,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 
+// Swagger API
+app.use("/swagger-ui/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Define API routes using the memeRoute.js created in routes directory
 app.use('/', memeRoute)
-
-
-// Default port is 8081
-const port = process.env.PORT || 8081;
-const server = app.listen(port, () => {
-  console.log('Listening on port ' + port)
-})
 
 // 404 Error
 app.use((req, res, next) => {
@@ -64,3 +64,9 @@ app.use(function (err, req, res, next) {
 
 // Home page
 app.get('/', (req, res) => {res.send('Hello from express')})
+
+// Default port is 8081
+const port = process.env.PORT || 8081;
+const server = app.listen(port, () => {
+  console.log('Listening on port ' + port)
+})

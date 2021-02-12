@@ -1,0 +1,272 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Meme Streamer",
+      "description": "Stream memes API documentation",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:8081",
+    "basePath": "/",
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+        "/memes": {
+            "get": {
+                "summary": "Get latest 100 memes from the database",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "required": [
+                                "url"
+                            ],
+                            "items": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "uniqueItems": true
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "caption": {
+                                        "type": "string"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "format": "url"
+                                    }
+                                }
+                            }
+                            }
+                        }
+                    }
+                },
+
+            "post": {
+                "summary": "To create a new meme",
+                "description": "A new meme is added in database",
+                "parameters": [
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "description": "New meme details",
+                        "schema":{
+                            "required": [
+                                    "url"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "example":"Disha Goyal"
+                                },
+                                "caption": {
+                                    "type": "string",
+                                    "example":"Hi, this is a funny caption"
+                                },
+                                "url": {
+                                    "type": "string",
+                                    "example":"https://static.mommypoppins.com/styles/image620x420/s3/school_meme_3_0.jpg"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "New meme is created in the database",
+                        "schema": {
+                            "required": [
+                                "url"
+                            ],
+                            "items": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "uniqueItems": true
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "caption": {
+                                        "type": "string"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "format": "url"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Error in creating new meme"
+                    },
+                    "409": {
+                        "description": "Duplicate entry! Record already exists."
+                    }
+                }
+            }
+        },
+        "/memes/{id}": {
+            "get": {
+                "summary": "To retrieve information about a single meme record",
+                "description": "Returns a single meme for a given id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of meme that we want to find"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Single meme of the given ID is returned",
+                        "schema": {
+                            "required": [
+                                "url"
+                            ],
+                            "items": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "uniqueItems": true
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "caption": {
+                                        "type": "string"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "format": "url"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Meme record of this id does not exist!"
+                    }       
+                }
+            },
+
+            "patch": {
+                "summary": "To update information about a single meme record (other than the owner's name)",
+                "description": "Returns the updated caption or updated URL or both",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id" ,
+                        "required": true,
+                        "schema":{
+                            "type": "string"
+                        },
+                        "description": "The ID of the meme we want to update"
+                    },
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "description": "New caption or URL or both",
+                        "required": true,
+                        "schema":{
+                                "properties": {
+                                    "caption": {
+                                        "type": "string",
+                                        "example":"Hi this is a new caption"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example":"https://static.mommypoppins.com/styles/image620x420/s3/school_meme_3_0.jpg"
+                                    }
+                                }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The meme is updated",
+                        "schema": {
+                            "items": {
+                                "properties": {
+                                    "caption": {
+                                        "type": "string",
+                                        "example": "This is a funny meme caption"
+                                    },
+                                    "url": {
+                                        "type": "string",
+                                        "example": "https://static.mommypoppins.com/styles/image620x420/s3/school_meme_3_0.jpg"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid! Name of the owner cannot be updated."
+                    },
+                    "404": {
+                        "description": "Meme record of this id does not exist!"
+                    }       
+                }
+            },
+
+            "delete": {
+                "summary": "Delete meme with the given ID",
+                "description": "The meme record with the given ID is removed from the database",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of meme that we want to update"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Meme is deleted",
+                        "required": [
+                            "url"
+                        ],
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "uniqueItems": true
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "caption": {
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "type": "string",
+                                    "format": "url"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Meme with the given ID does not exist!"
+                    }
+                }
+            }
+        }
+
+    }
+}
