@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image';
 import http from "../http-common";
 
 export default class CreateMeme extends Component {
@@ -34,7 +33,7 @@ export default class CreateMeme extends Component {
     
       async onSubmit(e) {
         const form = e.currentTarget;
-
+        
         // Check form validity to give appropriate errors
         if (form.checkValidity() === false) {
           e.preventDefault();

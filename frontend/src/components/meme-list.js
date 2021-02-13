@@ -36,7 +36,7 @@ export default class MemeList extends Component {
       render() {
         return (
             <div>
-                <CreateMeme/>
+                <CreateMeme history={this.props.history}/>
                 {this.MemeCards()}
             </div>
     );

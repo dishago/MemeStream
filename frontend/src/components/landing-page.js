@@ -7,7 +7,7 @@ export default class MemeList extends Component {
     render() {
         return (
             <div>
-                <CreateMeme/>
+                <CreateMeme history={this.props.history}/>
                 <hr></hr>
                 <Link className="edit-link" to={"/memes"}>Click here to check out amazing memes!</Link>
             </div>
