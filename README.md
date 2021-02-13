@@ -12,10 +12,22 @@ The parent directory of the project has the following files and directories-
 4. server_run.sh: Once the required software is installed using install.sh, the server_run.sh will be invoked to get the backend server up and running.
 5. sleep.sh: Once the server_run.sh is invoked (in the background), it may take a while to be up and running. So this script specifies the number of seconds it would like to wait (before the curl commands are run from test_server).
 6. test_server.sh: This script provides commands to test the backend server.
+7. Dockerfile: Dockerized backend solution, can be built and run
+8. docker-compose.yml: To get the database as well as backend server running together through docker
 
-### Prerequisites
+## Prerequisites
 
 The project is developed using the MERN tech stack.
+
+## Features
+1. Create a meme post with name, caption and image URL
+2. Read memes stored in the database
+3. Update existing memes (other than the owner's name)
+4. Delete existing memes
+5. View a single meme with a given id
+6. Share memes with friends on Facebook, Twitter or WhatsApp
+7. Dockerized solution (backend server) with Dockerfile in the parent directory
+8. API documentation (backend server) using Swagger
 
 ## Deployment
 
