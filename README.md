@@ -2,6 +2,22 @@
 
 The project allows user to create a meme post by providing name, caption and image URL for the meme. The user can also stream memes posted by other users and edit them as well (not the name of the meme owner).
 
+## Features
+1. Create a meme post with name, caption and image URL
+2. Read memes stored in the database
+3. Update existing memes (other than the owner's name)
+4. Delete existing memes
+5. View a single meme with a given id
+6. Share memes with friends on Facebook, Twitter or WhatsApp
+7. Dockerized solution (backend server) with Dockerfile in the parent directory
+8. API documentation (backend server) using Swagger
+
+<img width="1196" alt="image" src="https://github.com/dishago/MemeStream/assets/62263303/e15974e5-0a5c-47a7-9b9c-36e08140594d">
+
+<img width="542" alt="image" src="https://github.com/dishago/MemeStream/assets/62263303/5be66ec5-d57a-4ab6-adc2-c82177d2c46a">
+
+
+
 ## Getting Started
 
 The parent directory of the project has the following files and directories-
@@ -18,20 +34,3 @@ The parent directory of the project has the following files and directories-
 ## Prerequisites
 
 The project is developed using the MERN tech stack.
-
-## Features
-1. Create a meme post with name, caption and image URL
-2. Read memes stored in the database
-3. Update existing memes (other than the owner's name)
-4. Delete existing memes
-5. View a single meme with a given id
-6. Share memes with friends on Facebook, Twitter or WhatsApp
-7. Dockerized solution (backend server) with Dockerfile in the parent directory
-8. API documentation (backend server) using Swagger
-
-## Deployment
-
-The project has been deployed on Heroku and can be viewed at https://disha-memestream.herokuapp.com (frontend) and https://disha-xmeme.herokuapp.com (backend)
-
-## API documentation
-API documentation is done using Swagger and can be found locally at http:localhost:8081/swagger-ui/ OR publically deployed at http://disha-xmeme.herokuapp.com/swagger-ui/
